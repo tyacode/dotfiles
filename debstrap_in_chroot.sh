@@ -134,6 +134,13 @@ setup_grub() {
 	fi
 }
 
+clean_apt_cache() {
+	printf '%s\n' "Cleaning Apt cache" && sleep 1
+	apt autoremove
+	apt autoclean
+	apt clean
+}
+
 final() {
 	echo
 	printf '%s\n' "Installation finished. You might want to remove the 'install_in_chroot.sh' file from the root directory before rebooting"
@@ -154,6 +161,7 @@ main() {
 	set_user
 	enable_firewall
 	setup_grub
+	clean_apt_cache
 	final
 }
 
